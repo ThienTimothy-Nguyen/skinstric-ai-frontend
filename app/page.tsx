@@ -1,8 +1,9 @@
+import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
-    <main>
-      main page
+    <main className="global-container absolute top-0 h-screen">
+      <Hero />
     </main>
   );
 }
