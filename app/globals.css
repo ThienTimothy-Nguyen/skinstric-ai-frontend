@@ -27,7 +27,8 @@
     outline: none;
     border: none;
     background: transparent;
-    transition: all 200ms ease-in-out;
+    transition: opacity 200ms ease-in-out, color 200ms ease-in-out,
+    background-color 200ms ease-in-out;
   }
 
   button:active {

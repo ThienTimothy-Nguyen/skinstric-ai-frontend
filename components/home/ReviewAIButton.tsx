@@ -1,19 +1,54 @@
+"use client";
 import Image from "next/image";
+import gsap from 'gsap';
+import { RefObject, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 
-function ReviewAIButton() {
+type ReviewAIButtonProps = {
+  reviewAIButtonRef: RefObject<HTMLImageElement | null>,
+  reviewAIBackgroundRef: RefObject<HTMLElement | null>,
+  reviewTlRef: RefObject<gsap.core.Timeline | null>,
+}
+
+function ReviewAIButton({
+  reviewAIButtonRef,
+  reviewAIBackgroundRef,
+  reviewTlRef, 
+}: ReviewAIButtonProps) {
+  
+  const handleMouseEnter = () => {
+    reviewTlRef.current?.play();
+  }
+
+  const handleMouseLeave = () => {
+    reviewTlRef.current?.reverse();
+  }
+
   return (
-    <figure className="absolute -left-36 w-150.5 h-150.5">
+    <figure 
+      className="absolute -left-36 w-150.5 h-150.5"
+      ref={reviewAIBackgroundRef}>
       <Image 
         src='/rectangle-left.svg'
         alt="Left rectangle"
         fill
-        className="z-0" />
-      <button className="absolute z-10 top-1/2 left-1/2 -translate-1/2">
-        <Image 
-          src='/button-review.svg'
-          alt="View AI button"
-          width={152}
-          height={152} />
+        className="z-0 object-contain" />
+        
+      <button 
+        className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex items-center justify-between gap-2 text-[14px]" 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave} >
+        <Image
+          src='/arrow-button.svg'
+          alt='Arrow button'
+          width={20}
+          height={20}
+          style={{
+            height: 'auto',
+          }}
+          className='w-10'
+          ref={reviewAIButtonRef} />
+          <span>DISCOVER A.I.</span>
       </button>
     </figure>
   )

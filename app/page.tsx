@@ -1,9 +1,11 @@
-import Hero from "@/components/home/Hero";
+import HeroDesktop from "@/components/home/HeroDesktop";
+import HeroMobile from "@/components/home/HeroMobile";
 
 export default function Home() {
   return (
-    <main className="global-container absolute top-0 h-screen">
-      <Hero />
+    <main className="h-full w-full overflow-hidden">
+      <HeroDesktop />
+      <HeroMobile />
     </main>
   );
 }

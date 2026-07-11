@@ -23,9 +23,9 @@ export default function RootLayout({
       lang="en"
       className={`${robotoSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen relative">
         <Header />  
-          {children}
+        {children}
       </body>
     </html>
   );
