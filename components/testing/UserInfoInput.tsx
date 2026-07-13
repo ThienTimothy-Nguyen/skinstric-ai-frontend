@@ -20,9 +20,7 @@ function UserInfoInput() {
         (!userSaved && !loading) ?
         
         <UserInfoInputForm 
-          setLoading={setLoading} />
-
-         :
+          setLoading={setLoading} /> :
 
         (
           (!userSaved && loading) ? 
@@ -39,7 +37,6 @@ function UserInfoInput() {
           </div>
         )
       }
-      
     </section>
   )
 }

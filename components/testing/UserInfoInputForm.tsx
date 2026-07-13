@@ -80,7 +80,7 @@ function UserInfoInputForm({ setLoading }: UserInfoInputFormProps) {
           placeholder={
             step === "enterName" ?
             "Introduce Yourself" : 
-            "your city name"
+            "Where are you from?"
           }
           onChange={(e) => {
             if (!/^[A-Za-z\s]*$/.test(e.target.value)) {
