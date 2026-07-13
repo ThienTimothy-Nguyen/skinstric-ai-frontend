@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/global/Header";
+import BottomNav from "@/components/global/BottomNav";
 
 const robotoSans = Roboto({
   variable: "--font-roboto-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className="min-h-screen relative">
         <Header />  
         {children}
+        <BottomNav />
       </body>
     </html>
   );

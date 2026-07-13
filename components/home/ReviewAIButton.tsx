@@ -1,17 +1,13 @@
 "use client";
 import Image from "next/image";
-import gsap from 'gsap';
-import { RefObject, useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { RefObject } from "react";
 
 type ReviewAIButtonProps = {
-  reviewAIButtonRef: RefObject<HTMLImageElement | null>,
   reviewAIBackgroundRef: RefObject<HTMLElement | null>,
   reviewTlRef: RefObject<gsap.core.Timeline | null>,
 }
 
 function ReviewAIButton({
-  reviewAIButtonRef,
   reviewAIBackgroundRef,
   reviewTlRef, 
 }: ReviewAIButtonProps) {
@@ -35,7 +31,7 @@ function ReviewAIButton({
         className="z-0 object-contain" />
         
       <button 
-        className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex items-center justify-between gap-2 text-[14px]" 
+        className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex items-center justify-between gap-2 text-[14px] cursor-not-allowed group" 
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave} >
         <Image
@@ -46,8 +42,7 @@ function ReviewAIButton({
           style={{
             height: 'auto',
           }}
-          className='w-10'
-          ref={reviewAIButtonRef} />
+          className='w-10 motion-safe:group-hover:scale-110 transition-transform duration-400 ease-in-out' />
           <span>DISCOVER A.I.</span>
       </button>
     </figure>

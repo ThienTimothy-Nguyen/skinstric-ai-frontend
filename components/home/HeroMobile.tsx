@@ -2,9 +2,11 @@ import HeroDescription from './HeroDescription';
 import HeroMobileButton from './HeroMobileButton';
 
 function HeroMobile() {
+
+
   return (
     <section className="relative min-h-screen flex lg:hidden flex-col justify-center items-center gap-2 md:gap-4">
-      <h1 className="text-[46px] md:text-[60px] text-center max-w-80 text-[#1A1B1C] font-[350] tracking-tighter leading-none relative z-10">
+      <h1 className="text-[46px] md:text-[60px] text-center max-w-80 text-[#1A1B1C] font-[350] tracking-tighter leading-none relative z-10 fade-in">
         Sophisticated skincare
       </h1>
 

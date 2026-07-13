@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { RefObject } from "react";
+import Link from "next/link";
 
 type TestButtonProps = {
-  testButtonRef: RefObject<HTMLImageElement | null>,
   testBackgroundRef: RefObject<HTMLElement | null>,
   testTlRef: RefObject<gsap.core.Timeline | null>,
 }
 
 function TestButton({ 
-  testButtonRef, 
   testBackgroundRef,
   testTlRef,
 }: TestButtonProps) {
@@ -31,8 +30,9 @@ function TestButton({
         fill
         className="z-0 object-contain" />
 
-      <button 
-        className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex items-center justify-between gap-2 text-[14px]" 
+      <Link 
+        href={'/testing'}
+        className="absolute z-10 top-1/2 left-1/2 -translate-1/2 flex items-center justify-between gap-2 text-[14px] group" 
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave} >
         <span>TAKE TEST</span>
@@ -44,9 +44,8 @@ function TestButton({
           style={{
             height: 'auto',
           }}
-          className='w-10 rotate-180'
-          ref={testButtonRef} />
-      </button>
+          className='w-10 rotate-180 motion-safe:group-hover:scale-110 transition-transform duration-400 ease-in-out' />
+      </Link>
     </figure>
   )
 }

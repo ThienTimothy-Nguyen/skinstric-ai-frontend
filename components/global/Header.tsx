@@ -7,7 +7,7 @@ function Header() {
       <div className="row flex justify-between items-center">
         <div className="text-sm flex justify-between items-center">
           <Link href={'/'}>
-            <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors px-4 py-2 font-semibold text-[10px] line-clamp-4 leading-4 text-[#1A1B1C]">
+            <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors px-4 py-2 font-semibold text-[10.5px] line-clamp-4 leading-4 text-[#1A1B1C]">
               SKINSTRIC
             </span>
           </Link>
@@ -36,7 +36,7 @@ function Header() {
           </figure>
             
         </div>
-        <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-colors  disabled:pointer-events-none text-primary-foreground shadow hover:bg-primary/90 px-4 py-2 mx-4 scale-[0.8] text-[#FCFCFC] text-[10px] bg-[#1A1B1C] leading-4 cursor-default">
+        <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-colors  disabled:pointer-events-none text-primary-foreground shadow hover:bg-primary/90 px-3.75 py-2.5 scale-[0.8] text-[#FCFCFC] text-[10.5px] bg-[#1A1B1C] leading-4 cursor-default">
           ENTER CODE
         </button>
       </div>

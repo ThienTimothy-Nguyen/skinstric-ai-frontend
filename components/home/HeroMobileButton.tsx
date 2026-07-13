@@ -1,8 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function HeroMobileButton() {
   return (
-    <button className='text-[9px] md:text-[12px] font-bold flex items-center justify-between gap-2 cursor-pointer z-10'>
+    <Link 
+      href={'/testing'}
+      className='text-[9px] md:text-[12px] font-bold flex items-center justify-between gap-2 z-10 motion-safe:hover:scale-110 transition-transform duration-400'>
       <span>ENTER EXPERIENCE</span>
       <Image
         src='/arrow-button.svg'
@@ -13,7 +16,7 @@ function HeroMobileButton() {
           height: 'auto',
         }}
         className='rotate-180 w-6 md:w-8' />
-    </button>
+    </Link>
   )
 }
 
