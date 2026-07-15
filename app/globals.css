@@ -49,3 +49,13 @@
     width: 100%;
   }
 }
+
+@layer utilities {
+  .spread-dotted-border {
+    background:
+      radial-gradient(circle, currentColor 1px, transparent 1px) top left / 12px 12px repeat-x,
+      radial-gradient(circle, currentColor 1px, transparent 1px) bottom left / 12px 12px repeat-x,
+      radial-gradient(circle, currentColor 1px, transparent 1px) top left / 12px 12px repeat-y,
+      radial-gradient(circle, currentColor 1px, transparent 1px) top right / 12px 12px repeat-y;
+  }
+}

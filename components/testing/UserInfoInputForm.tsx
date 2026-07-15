@@ -92,7 +92,7 @@ function UserInfoInputForm({ setLoading }: UserInfoInputFormProps) {
           }}
           autoComplete="off"
           autoFocus
-          className="text-5xl sm:text-6xl font-normal text-center bg-transparent border-b border-black focus:outline-none appearance-none w-93 sm:w-108 pt-1 tracking-[-0.07em] leading-16 text-[#1A1B1C]" 
+          className="text-4xl sm:text-6xl font-normal text-center bg-transparent border-b border-black focus:outline-none appearance-none w-72 sm:w-124 pt-1 tracking-[-0.07em] leading-16 text-[#1A1B1C]" 
         />
         <button
           type="submit"

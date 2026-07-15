@@ -18,7 +18,7 @@ function BottomNav() {
     },
     {
       pathName: '/result',
-      nextButton: 'GET SUMMARY',
+      nextButton: null,
     },
     {
       pathName: '/camera/capture',

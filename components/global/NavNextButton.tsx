@@ -16,6 +16,8 @@ type NavNextButtonProps = {
 function NavNextButton({ nextStep, currentStep }: NavNextButtonProps) {
   const userSaved = useUserActionAuthStore(state => state.userSaved);
 
+  if (!currentStep.nextButton) return
+
   if (currentStep.pathName === '/testing' && !userSaved) return
 
   return (
