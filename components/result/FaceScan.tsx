@@ -1,7 +1,13 @@
+"use client";
 import Image from 'next/image';
-import DiamondBackground from '../global/DiamondBackground';
+import DiamondBackground from '../animation/DiamondBackground';
+import { useResultLoading } from '@/store/ResultLoadingStore';
 
 function FaceScan() {
+  const faceUploadLoading = useResultLoading(state => state.faceUploadLoading);
+
+  if(faceUploadLoading) return null;
+
   return (
     <section className="min-h-[30vh] md:min-h-screen w-1/2 overflow-visible relative flex flex-col justify-center items-center">
       <DiamondBackground 
@@ -9,8 +15,7 @@ function FaceScan() {
         mediumScreenDiamondSize={240}
         largeScreenDiamondSize={386} />
 
-      <div className='relative
-      '>
+      <div className='relative'>
         <button>
           <Image 
           src="/camera.svg"

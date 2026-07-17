@@ -22,7 +22,11 @@ function BottomNav() {
     },
     {
       pathName: '/camera/capture',
-      nextButton: 'GET SUMMARY',
+      nextButton: null,
+    },
+    {
+      pathName: '/select',
+      nextButton: "GET SUMMARY",
     },
     {
       pathName: '/summary',
@@ -32,7 +36,10 @@ function BottomNav() {
 
   const currentIndex = steps.findIndex(step => step.pathName === pathName);
   const currentStep = steps[currentIndex] ?? '/';
-  const prevStep = steps[currentIndex - 1] ?? '/';
+  const prevStep = 
+    currentStep.pathName === "/select" ? 
+    steps[currentIndex - 2] : 
+    (steps[currentIndex - 1] ?? '/');
   const nextStep = steps[(currentIndex + 1) % steps.length];
 
   if (
@@ -41,7 +48,7 @@ function BottomNav() {
   ) return
 
   return (
-    <nav className="w-full px-8 md:px-0 absolute bottom-[16%] md:bottom-2 left-0 global-container bg-transparent">
+    <nav className="w-full px-8 md:px-0 fixed z-1000 bottom-[16%] md:bottom-2 left-0 global-container bg-transparent">
       <div className="row flex justify-between items-center">
         <NavBackButton prevStep={prevStep} />
         <NavNextButton 

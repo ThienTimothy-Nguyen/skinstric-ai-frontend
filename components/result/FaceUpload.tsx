@@ -1,31 +1,103 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import DiamondBackground from '../global/DiamondBackground';
-import { useImageFileStore } from '@/store/ImageFileStore';
+import DiamondBackground from '../animation/DiamondBackground';
+import { useRouter } from 'next/navigation';
+import { useResultLoading } from '@/store/ResultLoadingStore';
+import FaceUploadLoading from './FaceUploadLoading';
 
 function FaceUpload() {
-  const setImgFileBase64 = useImageFileStore(state => state.setImgFileBase64);
+  const [errorMessage, setErrorMessage] = useState("");
+  const faceUploadLoading = useResultLoading(state => state.faceUploadLoading);
+  const setFaceUploadLoading = useResultLoading(state => state.setFaceUploadLoading);
+  const router = useRouter();
 
+  useEffect(() => {
+    setFaceUploadLoading(false);
+  }, [setFaceUploadLoading])
+  
+  const analyzeImage = async (base64Img: string) => {
+    const res = await fetch(
+      "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          image: base64Img,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!res.ok) {
+      throw new Error("Unable to analyze image");
+    }
+
+    return res.json();
+  };
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result;
+
+        if (typeof result !== "string") {
+          return reject(new Error("Unable to read image"));
+        }
+
+        const base64 = result.split(",")[1];
+
+        if (!base64) {
+          return reject(new Error("Unable to extract Base64 image"));
+        }
+
+        return resolve(base64);
+      };
+
+      reader.onerror = () => {
+        return reject(reader.error ?? new Error("Unable to read image"));
+      };
+
+      reader.onabort = () => {
+        return reject(new Error("Image upload was canceled"));
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const imgFile = e.target.files?.[0];
 
     if (!imgFile) return;
 
-    const reader = new FileReader();
+    setFaceUploadLoading(true);
 
-    reader.onloadend = () => {
-      const result = reader.result;
-      
+    setErrorMessage("");
 
-      if (typeof result === 'string') {
-        const imgBase64 = result.split(",")[1];
-        setImgFileBase64(imgBase64)
-      }
+    try {
+      const imgBase64 = await fileToBase64(imgFile);
+      const userImageData = await analyzeImage(imgBase64);
+
+      localStorage.setItem("userImageData", JSON.stringify(userImageData));
+
+      router.push("/select");
+    } catch (error) {
+      console.error(error);
+
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong"
+      );
     }
+  };
 
-    reader.readAsDataURL(imgFile)
+  if (faceUploadLoading) {
+    return (
+      <FaceUploadLoading />
+    )
   }
 
   return (
@@ -41,7 +113,7 @@ function FaceUpload() {
           type="file"
           className='sr-only'
           accept='image/*'
-          onChange={(e) => handleFileChange(e)}
+          onChange={async (e) => handleFileChange(e)}
          />
         <label htmlFor='file-upload'>
           <Image 
@@ -70,7 +142,13 @@ function FaceUpload() {
         <span
           className='bottom-[-44%] left-[-6%] md:bottom-[-48%] md:left-[-138%] text-[12px] md:text-[14px] font-400 text-end absolute whitespace-nowrap leading-6'>
           ALLOW A.I. <br/>
-          TO SCAN YOUR FACE
+          ACCESS GALLERY <br />
+          {
+            !errorMessage && 
+            <span className='text-red-500 absolute left-0'>
+              {errorMessage}
+            </span>
+          }
         </span> 
       </div>
     </section>
