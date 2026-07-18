@@ -58,4 +58,12 @@
       radial-gradient(circle, currentColor 1px, transparent 1px) top left / 12px 12px repeat-y,
       radial-gradient(circle, currentColor 1px, transparent 1px) top right / 12px 12px repeat-y;
   }
+
+  .progress-circle {
+    fill: none;
+    stroke: black;
+    stroke-width: 6px;
+    stroke-dasharray: var(--circumference);
+    stroke-dashoffset: var(--dash-offset);
+  }
 }

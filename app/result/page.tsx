@@ -4,7 +4,7 @@ import FaceUpload from "@/components/result/FaceUpload";
 function ResultPage() {
   return (
     <main className="min-h-screen w-full overflow-hidden relative flex flex-col md:flex-row justify-center items-center">
-      <span className="absolute top-16 left-9 text-left font-semibold text-xs">TO START ANALYSIS</span>
+      <span className="absolute top-18 left-9 text-left font-semibold text-xs">TO START ANALYSIS</span>
       <FaceScan />
       <FaceUpload />
     </main>

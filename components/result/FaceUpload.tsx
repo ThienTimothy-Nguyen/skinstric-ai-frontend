@@ -82,7 +82,7 @@ function FaceUpload() {
       const imgBase64 = await fileToBase64(imgFile);
       const userImageData = await analyzeImage(imgBase64);
 
-      localStorage.setItem("userImageData", JSON.stringify(userImageData));
+      localStorage.setItem("userImageData", JSON.stringify(userImageData.data));
 
       router.push("/select");
     } catch (error) {
