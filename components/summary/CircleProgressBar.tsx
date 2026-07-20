@@ -1,60 +1,50 @@
 "use client";
-import { DemographicSelections, DemographicType, UserImageData } from "@/types/demographic";
+import { DemographicSelections, DemographicSelectionValue, DemographicType, UserImageData } from "@/types/demographic";
 import { useEffect, useState } from "react";
 
 type CircleProgressBarProps = {
-  userData: UserImageData | null,
-  demographicShow: DemographicSelections[DemographicType] | null;
+  userData: UserImageData | null;
+  currentSelectedType: DemographicType;
+  demographicSelections: DemographicSelections | null;
+};
+
+const CIRCLE_RADIUS = 197;
+const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
+
+function getParentDemographicType(
+  userData: UserImageData,
+  targetDemographic: DemographicSelectionValue,
+): DemographicType | undefined {
+  return (Object.keys(userData) as DemographicType[]).find(
+    (key) => targetDemographic in userData[key],
+  );
 }
 
-function CircleProgressBar({ 
+function CircleProgressBar({
   userData,
-  demographicShow 
+  currentSelectedType,
+  demographicSelections,
 }: CircleProgressBarProps) {
-
-  const [circleOffset,setCircleOffset] = useState(0);
+  const [circleOffset, setCircleOffset] = useState(0);
   const [percentVal, setPercentVal] = useState(0);
 
-  const circleRadius = 197;
-  const circumference = 2 * Math.PI * circleRadius;
-
   useEffect(() => {
-    if(!userData || !demographicShow) return;
+    if (!userData || !currentSelectedType || !demographicSelections) return;
 
-    const getParentDemographicType = (targetDemographic: typeof demographicShow): DemographicType | undefined => {
+    const targetDemographic = demographicSelections[currentSelectedType];
+    if (!targetDemographic) return;
 
-      if(!userData || !targetDemographic) return;
+    const parentKey = getParentDemographicType(userData, targetDemographic);
+    if (!parentKey) return;
 
-      const parentKeys = Object.keys(userData) as DemographicType[];
+    const rawPercent = userData[parentKey][
+      targetDemographic as keyof UserImageData[typeof parentKey]
+    ];
+    const rounded = Math.round(rawPercent * 100);
 
-      for (const key of parentKeys) {
-        if (targetDemographic in userData[key]) {
-          return key
-        }
-      }
-    }
-
-    const getDataShow = (targetDemographic: typeof demographicShow) => {
-      if (!userData || !targetDemographic) return;
-
-      const parentKey = getParentDemographicType(targetDemographic);
-
-      if (parentKey && targetDemographic) {
-        const rawPercentVal = 
-          userData[parentKey][
-            targetDemographic as keyof UserImageData[typeof parentKey]
-          ];
-        
-        const roundedPercentVal = Math.round(rawPercentVal * 100)
-
-        setPercentVal(roundedPercentVal);
-        setCircleOffset((100 - roundedPercentVal) / 100 * circumference);
-      }
-    }
-
-    getDataShow(demographicShow);
-    
-  }, [circumference, demographicShow, userData])
+    setPercentVal(rounded);
+    setCircleOffset(((100 - rounded) / 100) * CIRCUMFERENCE);
+  }, [userData, currentSelectedType, demographicSelections]);
 
   return (
     <div className="relative bg-gray-100 p-4 flex flex-col items-center md:items-end justify-center md:min-h-112 md:border-t">
@@ -66,29 +56,32 @@ function CircleProgressBar({
               <span className="text-3xl md:text-[40px] font-normal">{percentVal}%</span>
             </div>
           </div>
-          <svg 
+          <svg
             width="420px"
             height="420px"
             xmlns="http://www.w3.org/2000/svg"
-            className="-rotate-90 absolute z-10 -top-4.75 -left-4">
-            <circle 
-              cx='208'
-              cy='208'
-              r={circleRadius}
-              className="progress-circle transition-discrete duration-400 ease-in-out"
+            className="-rotate-90 absolute z-10 -top-4.75 -left-4"
+          >
+            <circle
+              cx="208"
+              cy="208"
+              r={CIRCLE_RADIUS}
+              className="progress-circle transition-discrete duration-700 ease-in-out"
               style={
                 {
-                  "--circumference": circumference,
+                  "--circumference": CIRCUMFERENCE,
                   "--dash-offset": circleOffset,
                 } as React.CSSProperties
-              } />
+              }
+            />
           </svg>
-          
         </div>
       </div>
-      <span className="md:absolute text-xs text-[#A0A4AB] md:text-sm lg:text-base font-normal mb-1 mt-5 md:mt-0 leading-6 md:bottom-[-15%] md:left-[22%] lg:left-[30%] xl:left-[40%] 2xl:left-[45%]">If A.I. estimate is wrong, select the correct one.</span>
+      <span className="md:absolute text-xs text-[#A0A4AB] md:text-sm lg:text-base font-normal mb-1 mt-5 md:mt-0 leading-6 md:bottom-[-15%] md:left-[22%] lg:left-[30%] xl:left-[40%] 2xl:left-[45%]">
+        If A.I. estimate is wrong, select the correct one.
+      </span>
     </div>
-  )
+  );
 }
 
-export default CircleProgressBar
+export default CircleProgressBar;

@@ -10,8 +10,7 @@ function DemographicsStats() {
   const [demographicTypes, setDemographicTypes] =
   useState<DemographicType[] | null>(null);
   const [demographicSelections, setDemographicSelections] = useState<DemographicSelections | null>(null);
-  const [demographicShow, setDemographicShow] = useState<DemographicSelections[DemographicType] | null>(null);
-  const [currentSelectedType, setCurrentSelectedtype] = useState<DemographicType>("race");
+  const [currentSelectedType, setCurrentSelectedType] = useState<DemographicType>("race");
   const router = useRouter();
 
   const getTopDemographicSelection = <T extends DemographicType>(
@@ -55,9 +54,6 @@ function DemographicsStats() {
       gender: getTopDemographicSelection(userParsedData, "gender"),
     });
 
-    // initialize demographic data shown on circle progress bar
-    setDemographicShow(getTopDemographicSelection(userParsedData, "race"));
-
   }, [router]);
 
   return (
@@ -68,8 +64,8 @@ function DemographicsStats() {
           {demographicTypes?.map(type => (
             <li 
               key={type}
-              onClick={() => setCurrentSelectedtype(type)}
-              className={`p-3 cursor-pointer  bg-[#F3F3F4] flex-1 flex flex-col justify-between hover:bg-[#E1E1E2] border-t capitalize ${currentSelectedType === type && "text-white bg-black hover:bg-black"}`}>
+              onClick={() => setCurrentSelectedType(type)}
+              className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t capitalize ${currentSelectedType === type ? "text-white bg-black hover:bg-black" : "text-black bg-[#F3F3F4] hover:bg-[#E1E1E2]"}`}>
               {demographicSelections?.[type]}
               <span className="uppercase">{type}</span>
             </li>
@@ -78,10 +74,13 @@ function DemographicsStats() {
 
         <CircleProgressBar 
           userData={userData}
-          demographicShow={demographicShow} />
+          currentSelectedType={currentSelectedType}
+          demographicSelections={demographicSelections} />
 
         <DemographicsBreakdown 
           userData={userData}
+          currentSelectedType={currentSelectedType}
+          demographicSelections={demographicSelections}
           setDemographicSelections={setDemographicSelections} />
 
       </div>

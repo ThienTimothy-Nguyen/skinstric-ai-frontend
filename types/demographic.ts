@@ -30,3 +30,5 @@ export type DemographicType = keyof UserImageData;
 export type DemographicSelections = {
   [K in DemographicType]: keyof UserImageData[K];
 };
+
+export type DemographicSelectionValue = DemographicSelections[DemographicType];
