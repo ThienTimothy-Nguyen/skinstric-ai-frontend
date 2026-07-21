@@ -40,7 +40,7 @@
   .row {
     width: 100%;
     margin: 0 auto;
-    padding: 0 18px;
+    padding: 0 22px;
     max-width:  1920px;
   }
 
@@ -59,11 +59,29 @@
       radial-gradient(circle, currentColor 1px, transparent 1px) top right / 12px 12px repeat-y;
   }
 
+  .zoom-in-out {
+    animation: zoom-in-out 2000ms ease-in-out infinite;
+  }
+
   .progress-circle {
     fill: none;
     stroke: black;
     stroke-width: 6px;
     stroke-dasharray: var(--circumference);
     stroke-dashoffset: var(--dash-offset);
+  }
+}
+
+@keyframes zoom-in-out {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }

@@ -48,7 +48,11 @@ function CircleProgressBar({
 
   return (
     <div className="relative bg-gray-100 p-4 flex flex-col items-center md:items-end justify-center md:min-h-112 md:border-t">
-      <span className="hidden md:block md:absolute text-[40px] left-5 top-2">WHITE</span>
+      <span className="hidden lg:block md:absolute text-[32px] left-5 top-2 capitalize tracking-wide">
+        {demographicSelections?.[currentSelectedType]} 
+        {currentSelectedType === "age" && 
+          <span className="lowercase"> y.o.</span>}
+      </span>
       <div className="relative w-full max-w-[384px] aspect-square mb-4 md:right-5 md:bottom-2">
         <div className="w-full h-full max-h-96 relative flex justify-center items-center mt-4">
           <div className="w-100 h-100 rounded-[50%] bg-gray-300 p-[7.25px] relative z-1 shadow-md">

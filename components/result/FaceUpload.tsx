@@ -8,6 +8,7 @@ import FaceUploadLoading from './FaceUploadLoading';
 
 function FaceUpload() {
   const [errorMessage, setErrorMessage] = useState("");
+  const confirmCameraAccess = useResultLoading(state => state.confirmCameraAccess);
   const faceUploadLoading = useResultLoading(state => state.faceUploadLoading);
   const setFaceUploadLoading = useResultLoading(state => state.setFaceUploadLoading);
   const router = useRouter();
@@ -107,8 +108,9 @@ function FaceUpload() {
         mediumScreenDiamondSize={240}
         largeScreenDiamondSize={386} />
 
-      <div className='relative'>
+      <div className={`relative ${confirmCameraAccess && "opacity-50"}`}>
         <input 
+          disabled={confirmCameraAccess}
           id='file-upload'
           type="file"
           className='sr-only'
@@ -125,7 +127,7 @@ function FaceUpload() {
             style={{
               height: "auto",
             }}
-            className='w-26 md:w-34 hover:scale-110 transition-all duration-500 ease-in-out' />
+            className={`w-26 md:w-34 ${!confirmCameraAccess && "hover:scale-110 transition-all duration-500 ease-in-out"}`} />
         </label>
 
         <Image 

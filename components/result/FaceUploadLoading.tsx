@@ -1,4 +1,3 @@
-import React from 'react'
 import LoadingCircles from '../animation/LoadingCircles'
 import DiamondBackground from '../animation/DiamondBackground'
 

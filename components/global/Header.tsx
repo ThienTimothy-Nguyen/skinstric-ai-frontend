@@ -1,9 +1,14 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 function Header() {
+  const pathName = usePathname();
+
   return (
-    <header className="global-container bg-white fixed top-0 left-0 w-full z-1000">
+    <header className={`global-container fixed top-0 left-0 w-full z-1000 ${pathName === "/camera/capture" ? "bg-transparent" : "bg-white"}`}>
       <div className="row flex justify-between items-center">
         <div className="text-sm flex justify-between items-center">
           <Link href={'/'}>

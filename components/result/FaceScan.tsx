@@ -2,9 +2,12 @@
 import Image from 'next/image';
 import DiamondBackground from '../animation/DiamondBackground';
 import { useResultLoading } from '@/store/ResultLoadingStore';
+import Link from 'next/link';
 
 function FaceScan() {
   const faceUploadLoading = useResultLoading(state => state.faceUploadLoading);
+  const confirmCameraAccess = useResultLoading(state => state.confirmCameraAccess);
+  const setConfirmCameraAccess = useResultLoading(state => state.setConfirmCameraAccess);
 
   if(faceUploadLoading) return null;
 
@@ -14,9 +17,30 @@ function FaceScan() {
         smallScreenDiamondSize={240}
         mediumScreenDiamondSize={240}
         largeScreenDiamondSize={386} />
+      
+      {confirmCameraAccess && <div className='absolute md:top-[43%] md:left-90 w-88 z-50'>
+        <div className='bg-[#1A1B1C] pt-4 pb-2'>
+          <h2 className='text-[#FCFCFC] text-base font-semibold mb-12 leading-6 pl-4'>
+            ALLOW A.I. TO ACCESS YOUR CAMERA
+          </h2>
+          <div className='flex mt-4 border-t border-[#FCFCFC] pt-2'>
+            <button 
+              className='px-7 md:translate-x-45 text-[#fcfcfca1] font-normal text-sm leading-4 tracking-tight cursor-pointer hover:text-gray-500'
+              onClick={() => setConfirmCameraAccess(false)}>
+              DENY
+            </button>
+            <Link 
+              href="/camera"
+              className='px-5 md:translate-x-45 text-[#FCFCFC] font-semibold text-sm leading-4 tracking-tight cursor-pointer hover:text-gray-300'>
+              ALLOW
+            </Link>
+          </div>
+        </div>
+      </div>}
 
       <div className='relative'>
-        <button>
+        <button
+          onClick={() => setConfirmCameraAccess(true)}>
           <Image 
           src="/camera.svg"
           alt='Camera icon'

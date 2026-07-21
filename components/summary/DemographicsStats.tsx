@@ -65,7 +65,7 @@ function DemographicsStats() {
             <li 
               key={type}
               onClick={() => setCurrentSelectedType(type)}
-              className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t capitalize ${currentSelectedType === type ? "text-white bg-black hover:bg-black" : "text-black bg-[#F3F3F4] hover:bg-[#E1E1E2]"}`}>
+              className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t uppercase ${currentSelectedType === type ? "text-white bg-black hover:bg-black" : "text-black bg-[#F3F3F4] hover:bg-[#E1E1E2]"}`}>
               {demographicSelections?.[type]}
               <span className="uppercase">{type}</span>
             </li>
