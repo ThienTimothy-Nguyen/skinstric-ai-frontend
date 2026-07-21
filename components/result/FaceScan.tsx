@@ -3,11 +3,16 @@ import Image from 'next/image';
 import DiamondBackground from '../animation/DiamondBackground';
 import { useResultLoading } from '@/store/ResultLoadingStore';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 function FaceScan() {
   const faceUploadLoading = useResultLoading(state => state.faceUploadLoading);
   const confirmCameraAccess = useResultLoading(state => state.confirmCameraAccess);
   const setConfirmCameraAccess = useResultLoading(state => state.setConfirmCameraAccess);
+
+  useEffect(() => {
+    setConfirmCameraAccess(false);
+  }, [setConfirmCameraAccess])
 
   if(faceUploadLoading) return null;
 

@@ -48,7 +48,7 @@ function BottomNav() {
   ) return
 
   return (
-    <nav className={`w-full px-8 md:px-0 fixed z-1000 bottom-[20%] md:bottom-2 left-0 global-container bg-transparent ${currentStep.pathName === "/camera/capture" ? "text-white" : "text-black"}`}>
+    <nav className={`w-full px-8 md:px-0 fixed z-500 bottom-[20%] md:bottom-2 left-0 global-container bg-transparent ${currentStep.pathName === "/camera/capture" ? "text-white" : "text-black"}`}>
       <div className="row flex justify-between items-center">
         <NavBackButton 
           prevStep={prevStep}

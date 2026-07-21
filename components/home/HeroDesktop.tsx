@@ -14,7 +14,7 @@ function HeroDesktop() {
   const testTlRef = useRef<gsap.core.Timeline | null>(null);
   
   useGSAP(() => {
-    //Fade in animation for title
+    //Initial fade in animation for title
     gsap.from(
       ".fade-in",
       {

@@ -1,7 +1,6 @@
 "use client";
 
 import CameraCaptureActions from "@/components/camera/CameraCaptureActions";
-import CameraInstructions from "@/components/camera/CameraInstructions";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -10,7 +9,6 @@ function CapturePage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [error, setError] = useState<string | null>(null);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +18,7 @@ function CapturePage() {
           setError("Camera is not supported in this browser");
           router.replace("/result");
           return;
-        };
+        }
 
         try {
           const permission = await navigator.permissions.query({
@@ -46,6 +44,7 @@ function CapturePage() {
         });
 
         streamRef.current = stream;
+        setError(null);
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -59,9 +58,7 @@ function CapturePage() {
     
 
     return () => {
-      if(!streamRef.current) return;
-
-      streamRef.current.getTracks().forEach((track) => track.stop());
+      streamRef.current?.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
   }, [router])
@@ -72,7 +69,6 @@ function CapturePage() {
         error={error} 
         videoRef={videoRef} 
         canvasRef={canvasRef} />
-      <CameraInstructions textColor="white" />
     </main>
   );
 }

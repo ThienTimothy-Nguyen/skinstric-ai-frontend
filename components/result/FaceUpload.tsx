@@ -5,6 +5,7 @@ import DiamondBackground from '../animation/DiamondBackground';
 import { useRouter } from 'next/navigation';
 import { useResultLoading } from '@/store/ResultLoadingStore';
 import FaceUploadLoading from './FaceUploadLoading';
+import { analyzeImage } from '@/lib/api';
 
 function FaceUpload() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,27 +17,6 @@ function FaceUpload() {
   useEffect(() => {
     setFaceUploadLoading(false);
   }, [setFaceUploadLoading])
-  
-  const analyzeImage = async (base64Img: string) => {
-    const res = await fetch(
-      "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          image: base64Img,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Unable to analyze image");
-    }
-
-    return res.json();
-  };
 
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
