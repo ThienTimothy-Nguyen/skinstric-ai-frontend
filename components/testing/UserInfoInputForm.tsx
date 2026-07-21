@@ -44,7 +44,7 @@ function UserInfoInputForm({ setLoading }: UserInfoInputFormProps) {
     if (step === "enterName") {
       if (!userName.trim()) return;
 
-      localStorage.setItem("name", userName);
+      localStorage.setItem("name", userName.trim());
       setStep("enterCity");
       return;
     }
@@ -52,7 +52,7 @@ function UserInfoInputForm({ setLoading }: UserInfoInputFormProps) {
     if (step === "enterCity") {
       if (!userCity.trim()) return;
 
-      localStorage.setItem("location", userCity);
+      localStorage.setItem("location", userCity.trim());
 
       setLoading(true);
       const data = await submitUserInfo();
@@ -87,8 +87,8 @@ function UserInfoInputForm({ setLoading }: UserInfoInputFormProps) {
               return
             };
 
-            if (step === "enterName") setUserName(e.target.value.trim());
-            if (step === "enterCity") setUserCity(e.target.value.trim());
+            if (step === "enterName") setUserName(e.target.value);
+            if (step === "enterCity") setUserCity(e.target.value);
           }}
           autoComplete="off"
           autoFocus
