@@ -1,6 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+gsap.registerPlugin(useGSAP);
+
 function LoadingCircles() {
   useGSAP(() => {
     const loadingCircles = gsap.utils.toArray<HTMLElement>(".loading-circle");

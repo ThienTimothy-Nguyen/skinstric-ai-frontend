@@ -6,6 +6,8 @@ import TestButton from "./TestButton";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+gsap.registerPlugin(useGSAP);
+
 function HeroDesktop() {
   const reviewAIBackgroundRef = useRef<HTMLElement | null>(null);
   const testBackgroundRef = useRef<HTMLElement | null>(null);

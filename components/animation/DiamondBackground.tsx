@@ -4,6 +4,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import React, { useRef } from "react";
 
+gsap.registerPlugin(useGSAP);
+
 interface DiamondBackgroundProps {
   smallScreenDiamondSize: number;
   mediumScreenDiamondSize: number;
