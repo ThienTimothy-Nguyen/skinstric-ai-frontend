@@ -32,7 +32,7 @@ Skinstric AI is a demographic-analysis web application built during a virtual in
 - Structured reusable components for a cleaner frontend workflow.
 - Used Zustand to manage application state.
 - Added animation and transition effects with GSAP.
-- 
+  
 ## What I Would Improve Next
 
 - Improve accessibility and keyboard navigation.
