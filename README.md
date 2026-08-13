@@ -1,9 +1,12 @@
-
 ---
+
+[Live Demo](https://skinstric-ai-frontend.vercel.app/)
 
 # Skinstric AI
 
 Skinstric AI is a demographic-analysis web application built during a virtual internship. The project focuses on frontend workflow, image submission, API integration, routing, and responsive UI development.
+
+<img width="1402" height="813" alt="Image" src="https://github.com/user-attachments/assets/66208232-5914-4e8c-8544-52790bd2e95d" />
 
 ## Features
 
